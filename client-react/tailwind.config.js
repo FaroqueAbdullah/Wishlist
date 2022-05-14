@@ -17,7 +17,7 @@ module.exports = {
       gray: {
         primary: '#424949',
         secondary: '#707B7C',
-        tertiary: '#B2BABB'
+        tertiary: 'rgba(112, 123, 124, 0.5)'
       },
       white: {
         primary: '#ffffff',

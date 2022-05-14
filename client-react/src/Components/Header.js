@@ -14,7 +14,7 @@ function Header({ isAuth }) {
   }
 
   return (
-    <div className="w-full shadow-xl p-2 sticky top-0">
+    <div className="w-full shadow-xl p-2 sticky top-0 z-30 bg-white-primary">
       <div className="w-full flex justify-between">
         <BrandIcon />
         <div className="font-bold flex justify-center items-center">
