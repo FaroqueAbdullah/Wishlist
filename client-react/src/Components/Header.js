@@ -1,19 +1,30 @@
-import { FaSignInAlt, FaSearch } from "react-icons/fa";
+import { useState } from "react";
 
-function Header() {
+import { FaSignInAlt, FaSearch, FaHeart, FaSignOutAlt } from "react-icons/fa";
+
+import HeaderOption  from "./HeaderOption";
+import BrandIcon from "./BrandIcon";
+import SearchBar from "./SearchBar";
+
+function Header({ isAuth }) {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const showSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  }
+
   return (
-    <div className="w-full flex justify-between">
-      <div className="font-bold text-gray-primary text-2xl">Wish<span>List</span></div>
-      <div className="font-bold flex justify-center items-center">
-        <div className="flex justify-center items-center text-gray-secondary pr-3">
-          <FaSearch className="text-green-primary text-lg" />
-          <span className="text-green-primary text-xs pl-1">Search</span>
-        </div>
-        <div className="flex justify-center items-center text-gray-secondary">
-          <FaSignInAlt className="text-green-primary text-lg" />
-          <span className="text-green-primary text-xs pl-1">Sign In</span>
+    <div className="w-full shadow-xl p-2 sticky top-0">
+      <div className="w-full flex justify-between">
+        <BrandIcon />
+        <div className="font-bold flex justify-center items-center">
+          <HeaderOption icon={ <FaSearch /> } name="Search" optionClick={showSearch}/>
+          <HeaderOption showIcon={isAuth} icon={ <FaHeart /> } name="Wish List" optionClick={() => {console.log('sadfsadf')}}/>
+          <HeaderOption showIcon={isAuth} icon={ <FaSignOutAlt /> } name="Sign Out" optionClick={() => {console.log('sadfsadf')}}/>
+          <HeaderOption showIcon={!isAuth} icon={ <FaSignInAlt /> } name="Sign In" optionClick={() => {console.log('sadfsadf')}}/>
         </div>
       </div>
+      <SearchBar icon={ <FaSearch /> } showSearch={isSearchOpen}/>
     </div>
   );
 }

@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'height': 'height'
+      }
+    },
     screens: {
       'tablet': '640px',
       'laptop': '1024px',
@@ -14,6 +18,9 @@ module.exports = {
         primary: '#424949',
         secondary: '#707B7C',
         tertiary: '#B2BABB'
+      },
+      white: {
+        primary: '#ffffff',
       },
     },
   },
