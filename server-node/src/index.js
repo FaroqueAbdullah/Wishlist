@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var cors = require('cors')
 
 require('dotenv').config();
 const connect = require('./config/db');
@@ -14,6 +15,9 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 connect();
 
+app.use(cors({
+  origin: 'http://localhost:3001',
+}));
 app.use(bodyParser.json());
 app.use('/auth' , authRouter);
 app.use('/product' , productRouter);

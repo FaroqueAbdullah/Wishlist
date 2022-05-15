@@ -1,1 +1,8 @@
 export const LOG_IN_USER = 'LOG_IN_USER';
+export const LOG_IN_USER_REQUEST = 'LOG_IN_USER_REQUEST';
+export const LOG_IN_USER_SUCCESS = 'LOG_IN_USER_SUCCESS';
+export const LOG_IN_USER_FAILURE = 'LOG_IN_USER_FAILURE';
+
+export const LOG_OUT_USER = 'LOG_OUT_USER';
+
+export const GET_PRODUCTS = 'GET_PRODUCTS';
