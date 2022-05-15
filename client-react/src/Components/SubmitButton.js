@@ -1,6 +1,11 @@
-function SubmitButton({ lebel }) {
+function SubmitButton({ lebel, onButtonSubmit }) {
   return (
-    <button className='border-2 border-gray-secondary rounded-md pl-2 pr-2 mt-3'>{ lebel }</button>
+    <button 
+      onClick={ onButtonSubmit } 
+      className='border-2 font-bold border-gray-secondary rounded-md pr-2 pl-2 pt-1 pb-1 mt-3 hover:bg-gray-primary hover:text-white-primary'
+    >
+      { lebel }
+    </button>
   );
 }
 

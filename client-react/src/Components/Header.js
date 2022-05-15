@@ -6,7 +6,7 @@ import HeaderOption  from "./HeaderOption";
 import BrandIcon from "./BrandIcon";
 import SearchBar from "./SearchBar";
 
-function Header({ isAuth }) {
+function Header({ isAuth, showAuthModel }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const showSearch = () => {
@@ -21,7 +21,7 @@ function Header({ isAuth }) {
           <HeaderOption icon={ <FaSearch /> } name="Search" optionClick={showSearch}/>
           <HeaderOption showIcon={isAuth} icon={ <FaHeart /> } name="Wish List" optionClick={() => {console.log('sadfsadf')}}/>
           <HeaderOption showIcon={isAuth} icon={ <FaSignOutAlt /> } name="Sign Out" optionClick={() => {console.log('sadfsadf')}}/>
-          <HeaderOption showIcon={!isAuth} icon={ <FaSignInAlt /> } name="Sign In" optionClick={() => {console.log('sadfsadf')}}/>
+          <HeaderOption showIcon={!isAuth} icon={ <FaSignInAlt /> } name="Sign In" optionClick={ showAuthModel }/>
         </div>
       </div>
       <SearchBar icon={ <FaSearch /> } showSearch={isSearchOpen}/>
