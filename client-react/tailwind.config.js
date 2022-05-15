@@ -22,6 +22,9 @@ module.exports = {
       white: {
         primary: '#ffffff',
       },
+      red: {
+        primary: '#92021F',
+      }
     },
   },
   plugins: [],
