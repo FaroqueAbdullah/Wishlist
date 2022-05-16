@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import { logInUserSuccss, logInUserFailed, logOutUserSuccss } from '../actions/user';
 
 const apiURL = 'http://localhost:3000/auth/login'; 

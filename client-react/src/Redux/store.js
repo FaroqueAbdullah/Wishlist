@@ -8,9 +8,6 @@ const store = compose(
   applyMiddleware(sagaMiddleware),
 )(createStore)(rootReducer);
 
-store.subscribe(() => {
-  console.log('store ', store.getState().user);
-});
 
 sagaMiddleware.run(rootSaga);
 
