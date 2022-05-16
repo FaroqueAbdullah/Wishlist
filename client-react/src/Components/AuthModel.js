@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import  { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import BrandIcon from './BrandIcon';
 import SubmitButton from './SubmitButton';
@@ -7,12 +8,22 @@ import LogIn from '../Pages/LogIn';
 import SignUp from '../Pages/SignUp';
 
 function AuthModel({ showModel, closeModel }) {
+  const user = useSelector(state => state.user);
+
   const [isLogIn, setIsLogIn] = useState(true);
+  const [serverError, setServerError] = useState('');
 
   const handleLoginOrSignUp = () => {
     setIsLogIn(!isLogIn);
-    console.log('sadfsadf')
   }
+
+  useEffect(() => {
+    if (!user.authenticated) {
+      setServerError(user.msssage);
+    } else if( showModel ) {
+      closeModel()
+    }
+  }, [user]);
 
   return (
     <>
@@ -24,6 +35,7 @@ function AuthModel({ showModel, closeModel }) {
             <div className="w-full pt-5 tablet:pt-3 tablet:w-1/2 flex justify-center items-center flex-col">
               <BrandIcon />
               <SubmitButton lebel={ isLogIn ? "Sign In" : "Log In"} onButtonSubmit={ handleLoginOrSignUp }/>
+              <p className="mt-1 text-red-primary">{ serverError }</p>
             </div>
             { isLogIn ? <LogIn /> : <SignUp /> }
           </div>

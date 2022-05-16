@@ -21,3 +21,21 @@ export function logInUserFailed( user ) {
   }
 }
 
+export function loadStateFromLocal(  ) {
+  return {
+    type: type.LOAD_STATE_FROM_LOCAL
+  }
+}
+
+export function logOutUserRequest( ) {
+  return {
+    type: type.LOG_OUT_USER_REQUEST
+  }
+}
+
+export function logOutUserSuccss( ) {
+  return {
+    type: type.LOG_OUT_USER_SUCCESS
+  }
+}
+

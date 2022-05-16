@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logInUserRequest } from '../Redux/actions/user';
 
 import InputField from '../Components/InputField';
@@ -7,9 +7,6 @@ import SubmitButton from '../Components/SubmitButton';
 
 function LogIn() {
   const dispatch = useDispatch();
-  const user = useSelector(state => {
-    // console.log('state', state);
-  });
 
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({ email: '', password: '' });
