@@ -4,7 +4,8 @@ import { getProductDataSuccess } from '../actions/product';
 const apiURL = 'http://localhost:3000/product'; 
 
 async function getApi(payload) {
-  return await fetch(apiURL, {
+  const queryAPI = apiURL + '/?searchName=' + payload;
+  return await fetch(queryAPI, {
     method: 'GET',
     headers: {'Content-Type': 'application/json' },
   }).then(response => response.json())

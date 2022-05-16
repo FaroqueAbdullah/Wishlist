@@ -8,6 +8,7 @@ import BrandIcon from "./BrandIcon";
 import SearchBar from "./SearchBar";
 
 import { logOutUserRequest } from '../Redux/actions/user';
+import { getProductDataRequest } from '../Redux/actions/product';
 
 function Header({ showAuthModel }) {
   const dispatch = useDispatch();
@@ -25,6 +26,10 @@ function Header({ showAuthModel }) {
     dispatch(logOutUserRequest());
   }
 
+  const searchInputSet = (searchInput) => {
+    dispatch(getProductDataRequest(searchInput));
+  }
+
   useEffect(() => {
     user.authenticated ? setIsAuth(true) : setIsAuth(false);
   }, [user]);
@@ -40,7 +45,7 @@ function Header({ showAuthModel }) {
           <HeaderOption showIcon={!isAuth} icon={ <FaSignInAlt /> } name="Sign In" optionClick={ showAuthModel }/>
         </div>
       </div>
-      <SearchBar icon={ <FaSearch /> } showSearch={isSearchOpen}/>
+      <SearchBar icon={ <FaSearch /> } showSearch={isSearchOpen} searchInputSet={searchInputSet}/>
     </div>
   );
 }
