@@ -29,6 +29,24 @@ export default function user(state = initialState, action) {
         msssage: action.payload.message,
         authenticated: false,
       }
+    case types.SIGN_UP_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.data,
+        error: false,
+        jwt: action.payload.jwt,
+        msssage: action.payload.message,
+        authenticated: true,
+      }
+    case types.SIGN_UP_USER_FAILURE:
+      return {
+        ...state,
+        user: {},
+        error: true,
+        jwt: null,
+        msssage: action.payload.message,
+        authenticated: false,
+      }
     case types.LOG_OUT_USER_SUCCESS:
       return {
         ...state,

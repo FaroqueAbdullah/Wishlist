@@ -1,9 +1,12 @@
 import  { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUpUserRequest } from '../Redux/actions/user';
 
 import InputField from '../Components/InputField';
 import SubmitButton from '../Components/SubmitButton';
 
 function SignUp() {
+  const dispatch = useDispatch();
 
   const [credentials, setCredentials] = useState({ name:'', email: '', phoneNumber: '', password: '' });
   const [errors, setErrors] = useState({ name:'', email: '', phoneNumber: '', password: '' });
@@ -28,8 +31,7 @@ function SignUp() {
 
     if ( !credentials.email || !credentials.password ) return;
     
-    console.log('dsafsafd', credentials);
-    
+    dispatch(signUpUserRequest(credentials));
   };
 
   return (
