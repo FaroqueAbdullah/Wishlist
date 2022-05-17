@@ -7,6 +7,8 @@ import {
   signUpUserFailed 
 } from '../actions/user';
 
+import { getWishListDataRequest } from '../actions/wishlist';
+
 const apiURL = 'http://localhost:3000/auth'; 
 
 async function logInApi(payload) {
@@ -30,8 +32,14 @@ async function signUpApi(payload) {
 function* logInUser(action) {
   try {
     const data = yield logInApi(action.payload);
-    data.status === 'success' ? yield localStorage.setItem('userData', JSON.stringify(data)) : yield localStorage.removeItem('userData');
-    data.status === 'success' ? yield put(logInUserSuccss(data)) : yield put(logInUserFailed(data));
+    if ( data.status === 'success' ) {
+      yield localStorage.setItem('userData', JSON.stringify(data))
+      yield put(logInUserSuccss(data))
+      yield put(getWishListDataRequest(data))
+    } else {
+      yield localStorage.removeItem('userData')
+      yield put(logInUserFailed(data))
+    }
   } catch (error) {
     console.log('error');
   }
@@ -40,8 +48,14 @@ function* logInUser(action) {
 function* signUpUser(action) {
   try {
     const data = yield signUpApi(action.payload);
-    data.status === 'success' ? yield localStorage.setItem('userData', JSON.stringify(data)) : yield localStorage.removeItem('userData');
-    data.status === 'success' ? yield put(signUpUserSuccess(data)) : yield put(signUpUserFailed(data));
+    if ( data.status === 'success' ) {
+      yield localStorage.setItem('userData', JSON.stringify(data))
+      yield put(logInUserSuccss(data))
+      yield put(getWishListDataRequest(data))
+    } else {
+      yield localStorage.removeItem('userData')
+      yield put(logInUserFailed(data))
+    }
   } catch (error) {
     console.log('error');
   }
@@ -51,6 +65,7 @@ function* loadUserFromLocal() {
   const userData = yield localStorage.getItem('userData');
   if (userData) {
     yield put(logInUserSuccss(JSON.parse(userData)));
+    yield put(getWishListDataRequest())
   }
 }
 

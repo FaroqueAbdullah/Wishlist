@@ -9,9 +9,10 @@ const initialState = {
 export default function wishlist(state = initialState, action) {
     switch (action.type) {
       case types.WISH_LIST_SUCCESS:
+        console.log('WISH_LIST_SUCCESS', action.payload);
         return {
           ...state,
-          wishList: action.payload.data,
+          wishList: action.payload.data.products,
           error: false,
           message: action.payload.message,
         }
