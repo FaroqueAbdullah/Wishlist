@@ -10,10 +10,10 @@ const checkUserWishlist = async ( userID ) => {
   }
 }
 
-const checkProductOnUserWishlist = async ( userId, productId ) => {
+const checkProductOnUserWishlist = async ( email, productId ) => {
   try {
     return await Wishlist.findOne({
-      userId: userId,
+      owner: email,
       products: { $elemMatch: { productId } }
     });
   } catch (err) {
@@ -21,23 +21,11 @@ const checkProductOnUserWishlist = async ( userId, productId ) => {
   }
 }
 
-const createWishlist = async ( userId, product ) => {
-  try {
-    console.log('createOrUpdateWishlist call')
-    return await Wishlist.create(
-      { userId: userId,
-        products: [product] 
-      });
-  } catch (err) {
-    console.log('createOrUpdateWishlist error')
-    return res.status(500).send({ 'message' : "Server error" });
-  }
-}
 
-const updateWishList = async ( req, res, next ) => {
+const updateOrCreateWishList = async ( email, product ) => {
   try {
     return await Wishlist.updateOne(
-      { userId: userId }, 
+      { owner: email }, 
       { $push: { products: product } 
     },{upsert: true})
   } catch (err) {
@@ -66,19 +54,18 @@ const addWishlist = async ( req, res, next ) => {
   try {
     const { productId } = req.body;
 
-    const checkWishlistByUserId = await checkUserWishlist( res.user_id )
+    const checkWishlistByOwner = await checkUserWishlist( res.user_email )
 
-    if ( !checkWishlistByUserId ) {
-      const wishlist = await createWishlist( res.user_id, req.body );
+    if ( !checkWishlistByOwner ) {
+      await updateOrCreateWishList( res.user_email, req.body );
     
       return res.status(200).send({ 
         'status': 'success',
-        'message' : "Product added to the wishlist",
-        'data': wishlist 
+        'message' : "Product added to the wishlist"
       });
     }
 
-    const checkWishlistByProductId = await checkProductOnUserWishlist( res.user_id, productId );
+    const checkWishlistByProductId = await checkProductOnUserWishlist( res.user_email, productId );
 
     if (checkWishlistByProductId) {
       return res.status(409 ).send({ 
@@ -87,13 +74,15 @@ const addWishlist = async ( req, res, next ) => {
       });
     }
 
-    const wishlist = await updateWishList( res.user_id, req.body );
+    const wishlist = await updateOrCreateWishList( res.user_email, req.body );
+
+    if ( wishlist ) {
+      return res.status(200).send({ 
+        'status': 'success',
+        'message' : "Product added to the wishlist"
+      });
+    }
     
-    return res.status(200).send({ 
-      'status': 'success',
-      'message' : "Product added to the wishlist",
-      'data': wishlist 
-    });
   } catch (err) {
     return res.status(500).send({ 'message' : err });
   }
@@ -105,7 +94,7 @@ const deleteWishlist = async ( req, res, next ) => {
     const { productId } = req.body;
 
     const checkWishlistById = await Wishlist.findOne({
-      userId: res.user_id,
+      owner: res.user_email,
       products: { $elemMatch: { productId } }
     });
 
@@ -117,7 +106,7 @@ const deleteWishlist = async ( req, res, next ) => {
     }
 
     const wishlist = await Wishlist.updateOne(
-      { userId: res.user_id }, 
+      { owner: res.user_email }, 
       { $pull: { products: { productId }} 
     },{safe: true, multi:true})
     
