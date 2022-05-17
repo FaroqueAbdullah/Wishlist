@@ -8,6 +8,7 @@ import Header from './Components/Header';
 
 
 const HomePage = lazy(() => import('./Pages/HomePage'));
+const WishlistPage = lazy(() => import('./Pages/WishlistPage'));
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function App() {
           <Header isAuth={ false } showAuthModel={ handleAuthModel }/>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/wishlist" element={<div>sdfsadf</div>} />
+            <Route path="/wishlist" element={<WishlistPage />} />
           </Routes>
         </BrowserRouter>
       </Suspense>
