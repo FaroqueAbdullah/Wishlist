@@ -38,4 +38,16 @@ export function wishListReset() {
     return {
         type: type.WISH_LIST_RESET
     }
+}
+
+export function wishListAuthModalShow( products ) {
+    return {
+        type: type.WISH_LIST_RESET_AUTHENTICATE_MODAL_SHOW,
+    }
+  }
+  
+  export function wishListAuthModalHide() {
+      return {
+          type: type.WISH_LIST_RESET_AUTHENTICATE_MODAL_HIDE
+      }
   }

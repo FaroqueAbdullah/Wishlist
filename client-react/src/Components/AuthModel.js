@@ -15,6 +15,7 @@ function AuthModel({ showModel, closeModel }) {
 
   const handleLoginOrSignUp = () => {
     setIsLogIn(!isLogIn);
+    setServerError('');
   }
 
   useEffect(() => {

@@ -11,14 +11,15 @@ function WishlistPage() {
 
   const [wishlist, setWishlist] = useState([]);
 
-  const wishlistData = useSelector(state => state.wishlist.wishList);
+  const wishlistData = useSelector(state => state.wishlist);
+
 
   useEffect(() => {
      setWishlist(store.getState().wishlist.wishList)
   },[])
 
   useEffect(() => {
-    setWishlist(wishlistData)
+    setWishlist(wishlistData.wishList)
   },[wishlistData])
 
   const removeProduct = (productId) => {
@@ -35,6 +36,7 @@ function WishlistPage() {
             <SubmitButton lebel='Remove' onButtonSubmit={() => {removeProduct( item.productId )}} />
           </div> 
         ))}
+        <div>{ wishlistData.wishlistCount === 0 && <div className="font-extrabold text-gray-secondary"> No Product in wishlist </div> }</div>
     </div>
   );
 }

@@ -4,7 +4,8 @@ const initialState = {
   wishList: [],
   wishlistCount: 0,
   error: false,
-  message: null
+  message: null,
+  showAuthenticateModal: false,
 }
 
 export default function wishlist(state = initialState, action) {
@@ -30,6 +31,16 @@ export default function wishlist(state = initialState, action) {
           wishlistCount: 0,
           error: false,
           message: null,
+        }
+      case types.WISH_LIST_RESET_AUTHENTICATE_MODAL_SHOW:
+        return {
+          ...state,
+          showAuthenticateModal: true,
+        }
+      case types.WISH_LIST_RESET_AUTHENTICATE_MODAL_HIDE:
+        return {
+          ...state,
+          showAuthenticateModal: false,
         }
       default:
         return state

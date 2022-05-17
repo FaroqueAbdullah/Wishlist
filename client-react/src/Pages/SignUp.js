@@ -29,7 +29,7 @@ function SignUp() {
       password: !credentials.password ? 'Password is required' : ''
     });
 
-    if ( !credentials.email || !credentials.password ) return;
+    if ( !credentials.email || !credentials.password || !credentials.phoneNumber || !credentials.password ) return;
     
     dispatch(signUpUserRequest(credentials));
   };

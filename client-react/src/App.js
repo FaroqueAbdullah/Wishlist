@@ -1,7 +1,8 @@
 import  { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadStateFromLocal } from './Redux/actions/user';
+import { wishListAuthModalHide } from './Redux/actions/wishlist';
 
 import AuthModel from "./Components/AuthModel";
 import Header from './Components/Header';
@@ -14,6 +15,8 @@ function App() {
   const dispatch = useDispatch();
   const [isShowAuthModel, setIsShowAuthModel] = useState(false);
 
+  const wishlist = useSelector(state => state.wishlist.showAuthenticateModal);
+
   const handleAuthModel = () => {
     setIsShowAuthModel(!isShowAuthModel)
   }
@@ -21,6 +24,13 @@ function App() {
   useEffect(() => {
     dispatch(loadStateFromLocal());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (wishlist) {
+      setIsShowAuthModel(true);
+      dispatch(wishListAuthModalHide());
+    }
+  }, [wishlist, dispatch]);
 
   return (
     <div className="w-full flex flex-col justify-center">

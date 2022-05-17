@@ -2,12 +2,13 @@ import  { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaHeart } from "react-icons/fa";
 
-import { postWishListDataRequest, deleteWishListDataRequest } from '../Redux/actions/wishlist';
+import { postWishListDataRequest, deleteWishListDataRequest, wishListAuthModalShow } from '../Redux/actions/wishlist';
 
 function Product({ item }) {
   const dispatch = useDispatch();
 
   const wishlist = useSelector(state => state.wishlist.wishList);
+  const user = useSelector(state => state.user.authenticated );
 
   const [isWishProduct, setIsWishProduct] = useState(false);
 
@@ -24,7 +25,11 @@ function Product({ item }) {
   }
 
   const productToWishlist = () => {
-    addOrRemoveFromWishList()
+    if (user) {
+      addOrRemoveFromWishList()
+    } else {
+      dispatch(wishListAuthModalShow())
+    }
   }
 
   useEffect(() => {

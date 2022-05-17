@@ -3,7 +3,6 @@ import * as types from '../types.js';
 const initialState = {
   user: {},
   error: null,
-  loading: false,
   jwt: null,
   msssage: null,
   authenticated: false,
