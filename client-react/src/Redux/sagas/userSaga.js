@@ -7,7 +7,7 @@ import {
   signUpUserFailed 
 } from '../actions/user';
 
-import { getWishListDataRequest } from '../actions/wishlist';
+import { getWishListDataRequest, wishListReset } from '../actions/wishlist';
 
 const apiURL = 'http://localhost:3000/auth'; 
 
@@ -72,6 +72,7 @@ function* loadUserFromLocal() {
 function* logOutUser() {
   yield localStorage.removeItem('userData');
   yield put(logOutUserSuccss());
+  yield put(wishListReset());
 }
 
 function* userSaga() {

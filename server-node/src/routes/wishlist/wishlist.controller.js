@@ -26,17 +26,20 @@ const updateOrCreateWishList = async ( email, product ) => {
   try {
     return await Wishlist.updateOne(
       { owner: email }, 
-      { $push: { products: product } 
+      { $push: { products: {...product, owner: email}  } 
     },{upsert: true})
   } catch (err) {
     return res.status(500).send({ 'message' : "Server error" });
   }
 }
 
+
+
+
 const getWishlist = async ( req, res, next ) => {
   try {
     const WishlistById = await Wishlist.findOne({ 
-      userId: res.user_id
+      owner: res.user_email
     });
 
     return res.status(200).send({ 

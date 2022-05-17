@@ -14,9 +14,11 @@ function Header({ showAuthModel }) {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.user);
+  const wishlistCount = useSelector(state => state.wishlist.wishlistCount);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const [totalWishlistOpen, settotalWishlistOpen] = useState(0);
 
   const showSearch = () => {
     setIsSearchOpen(!isSearchOpen);
@@ -34,13 +36,17 @@ function Header({ showAuthModel }) {
     user.authenticated ? setIsAuth(true) : setIsAuth(false);
   }, [user]);
 
+  useEffect(() => {
+    settotalWishlistOpen(wishlistCount);
+  }, [wishlistCount]);
+
   return (
     <div className="w-full shadow-xl p-2 sticky top-0 z-30 bg-white-primary">
       <div className="w-full flex justify-between">
         <BrandIcon />
         <div className="font-bold flex justify-center items-center">
           <HeaderOption icon={ <FaSearch /> } name="Search" optionClick={showSearch}/>
-          <HeaderOption showIcon={isAuth} icon={ <FaHeart /> } name="Wish List" optionClick={() => {console.log('sadfsadf')}}/>
+          <HeaderOption showIcon={isAuth} icon={ <FaHeart /> } name="Wish List" wishlistCount={wishlistCount} optionClick={() => {console.log('sadfsadf')}}/>
           <HeaderOption showIcon={isAuth} icon={ <FaSignOutAlt /> } name="Sign Out" optionClick={logOutUser}/>
           <HeaderOption showIcon={!isAuth} icon={ <FaSignInAlt /> } name="Sign In" optionClick={ showAuthModel }/>
         </div>

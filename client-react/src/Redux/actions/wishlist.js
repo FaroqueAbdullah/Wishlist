@@ -33,3 +33,9 @@ export function wishListDataFailed( products ) {
       payload: products,
   }
 }
+
+export function wishListReset() {
+    return {
+        type: type.WISH_LIST_RESET
+    }
+  }

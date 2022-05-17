@@ -13,13 +13,12 @@ function Product({ item }) {
 
   const addOrRemoveFromWishList = () => {
     if (isWishProduct) {
-      dispatch(deleteWishListDataRequest({ productId: item._id }));
+      dispatch(deleteWishListDataRequest({ productId: item.productId }));
     } else {
       dispatch(postWishListDataRequest({
         name: item.name,
         image: item.image,
-        productId: item._id,
-        description: item.description,
+        productId: item.productId
       }))
     }
   }
@@ -29,7 +28,7 @@ function Product({ item }) {
   }
 
   useEffect(() => {
-    const isProductWishList = wishlist.find(data => data.productId === item._id);
+    const isProductWishList = wishlist.find(data => data.productId === item.productId);
     if ( isProductWishList ) {
       setIsWishProduct(true);
     } else {
