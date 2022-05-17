@@ -30,7 +30,7 @@ function WishlistPage() {
         {
         wishlist.map((item, index) => ( 
           <div className="w-full tablet:w-2/3 flex items-center justify-between rounded-md border-2 border-gray-tertiary text-gray-secondary p-3 m-3">
-            <img className="w-20" src={ item.image }/>
+            <img className="w-20" src={ item.image } alt= {item.name}/>
             <div className=" font-bold">{ item.name }</div>
             <SubmitButton lebel='Remove' onButtonSubmit={() => {removeProduct( item.productId )}} />
           </div> 

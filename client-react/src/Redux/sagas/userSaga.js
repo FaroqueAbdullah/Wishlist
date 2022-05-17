@@ -3,8 +3,6 @@ import {
   logInUserSuccss, 
   logInUserFailed, 
   logOutUserSuccss, 
-  signUpUserSuccess, 
-  signUpUserFailed 
 } from '../actions/user';
 
 import { getWishListDataRequest, wishListReset } from '../actions/wishlist';

@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(loadStateFromLocal());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-full flex flex-col justify-center">

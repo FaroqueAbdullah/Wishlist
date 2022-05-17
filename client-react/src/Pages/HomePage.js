@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import  { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Product from "../Components/Product";
@@ -10,7 +10,7 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(getProductDataRequest(''));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-full flex justify-center mt-4 p-2">

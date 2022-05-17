@@ -28,20 +28,6 @@ export function signUpUserRequest( user ) {
   }
 }
 
-export function signUpUserSuccess( user ) {
-  return {
-    type: type.SIGN_UP_USER_SUCCESS,
-    payload: user
-  }
-}
-
-export function signUpUserFailed( user ) {
-  return {
-    type: type.SIGN_UP_USER_FAILURE,
-    payload: user
-  }
-}
-
 export function loadStateFromLocal(  ) {
   return {
     type: type.LOAD_STATE_FROM_LOCAL

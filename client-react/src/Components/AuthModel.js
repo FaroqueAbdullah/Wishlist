@@ -23,7 +23,7 @@ function AuthModel({ showModel, closeModel }) {
     } else if( showModel ) {
       closeModel()
     }
-  }, [user]);
+  }, [user, showModel, closeModel]);
 
   return (
     <>
