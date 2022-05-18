@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { loadStateFromLocal } from './Redux/actions/user';
 import { wishListAuthModalHide } from './Redux/actions/wishlist';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import AuthModel from "./Components/AuthModel";
 import Header from './Components/Header';
@@ -23,7 +25,7 @@ function App() {
 
   useEffect(() => {
     dispatch(loadStateFromLocal());
-  }, [dispatch]);
+  });
 
   useEffect(() => {
     if (wishlist) {
@@ -44,6 +46,9 @@ function App() {
         </BrowserRouter>
       </Suspense>
       <AuthModel showModel={ isShowAuthModel } closeModel={handleAuthModel} />
+      <ToastContainer 
+        toastClassName="dark-toast"
+      />
     </div>
   );
 }

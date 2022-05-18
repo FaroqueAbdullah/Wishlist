@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { FaSignInAlt, FaSearch, FaHeart, FaSignOutAlt } from "react-icons/fa";
 
 import HeaderOption  from "./HeaderOption";
@@ -10,7 +11,6 @@ import SearchBar from "./SearchBar";
 import { logOutUserRequest } from '../Redux/actions/user';
 import { getProductDataRequest } from '../Redux/actions/product';
 
-import { useNavigate } from "react-router-dom";
 
 function Header({ showAuthModel }) {
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ function Header({ showAuthModel }) {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const [isWishlistChanged, setIsWishlistChanged] = useState(0);
 
   const showSearch = () => {
     setIsSearchOpen(!isSearchOpen);
@@ -34,6 +35,16 @@ function Header({ showAuthModel }) {
   const searchInputSet = (searchInput) => {
     dispatch(getProductDataRequest(searchInput));
   }
+
+  useEffect(() => {
+    if ( wishlistCount > isWishlistChanged ) {
+      setIsWishlistChanged(wishlistCount);
+      toast("Product added to wishlist!");
+    } else if ( wishlistCount < isWishlistChanged ) {
+      setIsWishlistChanged(wishlistCount);
+      toast("Product removed to wishlist!");
+    }
+  } , [wishlistCount, isWishlistChanged]);
 
   useEffect(() => {
     user.authenticated ? setIsAuth(true) : setIsAuth(false);
