@@ -11,6 +11,7 @@ const initialState = {
 export default function user(state = initialState, action) {
   switch (action.type) {
     case types.LOG_IN_USER_SUCCESS:
+      console.log('sdaf', action.payload);
       return {
         ...state,
         user: action.payload.data,
@@ -20,12 +21,13 @@ export default function user(state = initialState, action) {
         authenticated: true,
       }
     case types.LOG_IN_USER_FAILURE:
+      console.log('fsdf', action.payload.payload);
       return {
         ...state,
         user: {},
         error: true,
         jwt: null,
-        msssage: action.payload.message,
+        msssage: action.payload.payload.message,
         authenticated: false,
       }
     case types.LOG_OUT_USER_SUCCESS:

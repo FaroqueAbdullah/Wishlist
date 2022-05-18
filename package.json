@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "npm start --prefix server-node",
+    "start:client": "npm start --prefix client-react",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\" "
   },
   "keywords": [],
   "author": "Faroque Abdullah",

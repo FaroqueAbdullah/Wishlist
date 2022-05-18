@@ -36,7 +36,7 @@ function AuthModel({ showModel, closeModel }) {
             <div className="w-full pt-5 tablet:pt-3 tablet:w-1/2 flex justify-center items-center flex-col">
               <BrandIcon />
               <SubmitButton lebel={ isLogIn ? "Sign In" : "Log In"} onButtonSubmit={ handleLoginOrSignUp }/>
-              <p className="mt-1 text-red-primary">{ serverError }</p>
+              <p className="p-2 text-xs text-center text-red-primary">{ serverError }</p>
             </div>
             { isLogIn ? <LogIn /> : <SignUp /> }
           </div>

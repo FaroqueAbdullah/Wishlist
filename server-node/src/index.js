@@ -11,12 +11,12 @@ const wishlistRouter = require('./routes/wishlist/wishlist.router');
 
 const verifyToken = require('./middleware/auth')
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 connect();
 
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: '*',
 }));
 app.use(bodyParser.json());
 app.use('/auth' , authRouter);

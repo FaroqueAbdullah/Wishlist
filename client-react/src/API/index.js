@@ -1,8 +1,9 @@
 import axios from "axios";
 
 import store from "../Redux/store";
+import { logInUserFailed } from '../Redux/actions/user';
 
-const apiURL = 'http://localhost:3000'; 
+const apiURL = 'http://localhost:4000'; 
 
 axios.interceptors.request.use(function (config) {
     const token = store.getState().user.jwt;
@@ -22,13 +23,13 @@ export async function getProductApi(payload) {
 export async function logInApi(payload) {
     return await axios.post(apiURL + '/auth/login', payload, {})
     .then(response => response.data)
-    .catch(error => console.log(error));
+    .catch(error => logInUserFailed(error.response.data));
 }
 
 export async function signUpApi(payload) {
     return await axios.post(apiURL + '/auth/registration', payload, {})
     .then(response => response.data)
-    .catch(error => console.log(error));
+    .catch(error => logInUserFailed(error.response.data));
 }
 
 export async function getJWT() {

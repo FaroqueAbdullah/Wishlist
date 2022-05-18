@@ -31,18 +31,21 @@ function Header({ showAuthModel }) {
   }
 
   useEffect(() => {
-    if ( wishlistCount > isWishlistChanged ) {
-      setIsWishlistChanged(wishlistCount);
+    setIsWishlistChanged(wishlistCount);
+    if ( isAuth && (wishlistCount - isWishlistChanged) === 1 ) {
       toast("Product added to wishlist!");
-    } else if ( wishlistCount < isWishlistChanged ) {
-      setIsWishlistChanged(wishlistCount);
+    } else if ( isAuth && (isWishlistChanged - wishlistCount) === 1 ) {
       toast("Product removed from wishlist!");
     }
-  } , [wishlistCount, isWishlistChanged]);
+  } , [wishlistCount, isWishlistChanged, isAuth]);
 
   useEffect(() => {
     user.authenticated ? setIsAuth(true) : setIsAuth(false);
   }, [user]);
+
+  useEffect(() => {
+    console.log('sadfasf ');
+  }, []);
 
   return (
     <div className="w-full shadow-xl p-2 fixed top-0 z-30 bg-white-primary">
