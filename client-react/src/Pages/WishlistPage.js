@@ -27,7 +27,7 @@ function WishlistPage() {
   }
 
   return (
-    <div className="w-full flex flex-col justify-center items-center pt-10">
+    <div className="w-full flex flex-col justify-center items-center pt-16">
         {
         wishlist.map((item, index) => ( 
           <div className="w-full tablet:w-2/3 flex items-center justify-between rounded-md border-2 border-gray-tertiary text-gray-secondary p-3 m-3">

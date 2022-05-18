@@ -19,14 +19,8 @@ function Header({ showAuthModel }) {
   const user = useSelector(state => state.user);
   const wishlistCount = useSelector(state => state.wishlist.wishlistCount);
   
-
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [isWishlistChanged, setIsWishlistChanged] = useState(0);
-
-  const showSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-  }
 
   const logOutUser = () => {
     dispatch(logOutUserRequest());
@@ -42,7 +36,7 @@ function Header({ showAuthModel }) {
       toast("Product added to wishlist!");
     } else if ( wishlistCount < isWishlistChanged ) {
       setIsWishlistChanged(wishlistCount);
-      toast("Product removed to wishlist!");
+      toast("Product removed from wishlist!");
     }
   } , [wishlistCount, isWishlistChanged]);
 
@@ -51,19 +45,18 @@ function Header({ showAuthModel }) {
   }, [user]);
 
   return (
-    <div className="w-full shadow-xl p-2 sticky top-0 z-30 bg-white-primary">
+    <div className="w-full shadow-xl p-2 fixed top-0 z-30 bg-white-primary">
       <div className="w-full flex justify-between">
         <div onClick={() => navigation("/")}>
           <BrandIcon  />
         </div>
+        <SearchBar icon={ <FaSearch /> } showSearch={true} searchInputSet={searchInputSet}/>
         <div className="font-bold flex justify-center items-center">
-          <HeaderOption icon={ <FaSearch /> } name="Search" optionClick={showSearch}/>
           <HeaderOption showIcon={isAuth} icon={ <FaHeart /> } name="Wish List" wishlistCount={wishlistCount} optionClick={() => navigation("/wishlist")}/>
           <HeaderOption showIcon={isAuth} icon={ <FaSignOutAlt /> } name="Sign Out" optionClick={logOutUser}/>
           <HeaderOption showIcon={!isAuth} icon={ <FaSignInAlt /> } name="Sign In" optionClick={ showAuthModel }/>
         </div>
       </div>
-      <SearchBar icon={ <FaSearch /> } showSearch={isSearchOpen} searchInputSet={searchInputSet}/>
     </div>
   );
 }
