@@ -6,26 +6,8 @@ import {
 } from '../actions/user';
 
 import { getWishListDataRequest, wishListReset } from '../actions/wishlist';
+import { logInApi, signUpApi } from '../../API/index';
 
-const apiURL = 'http://localhost:3000/auth'; 
-
-async function logInApi(payload) {
-  return await fetch(apiURL + '/login', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(response => response.json())
-    .catch(error => console.log(error));
-}
-
-async function signUpApi(payload) {
-  return await fetch(apiURL + '/registration', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(response => response.json())
-    .catch(error => console.log(error));
-}
 
 function* logInUser(action) {
   try {
